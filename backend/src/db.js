@@ -1,15 +1,17 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
 let client;
 
-export const initializeDbConnection = async () => {
-    client = await MongoClient.connect(`mongodb+srv://${process.env.API_MONGO_USER}:${process.env.API_MONGO_PASS}@cluster0.xkeckso.mongodb.net/?retryWrites=true&w=majority`, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-}
+const dbURI = `mongodb+srv://admin:admin@cluster0.orajswt.mongodb.net/database?retryWrites=true&w=majority`;
 
-export const getDbConnection = dbName => {
-    const db = client.db(dbName);
-    return db;
-}
+export const initializeDbConnection = async () => {
+  client = await MongoClient.connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+};
+
+export const getDbConnection = (dbName) => {
+  const db = client.db("database");
+  return db;
+};
